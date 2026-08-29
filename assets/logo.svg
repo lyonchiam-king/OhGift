@@ -1,20 +1,43 @@
-<!-- PLACEHOLDER LOGO — replace assets/logo.svg with your real logo (SVG preferred, or swap to .png and update the <img src> in index.html) -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" role="img" aria-label="Oh! Gift">
-  <defs>
-    <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#D9A7A0"/>
-      <stop offset="55%" stop-color="#B76E79"/>
-      <stop offset="100%" stop-color="#8E4A56"/>
-    </linearGradient>
-  </defs>
-  <g fill="none" stroke="url(#rg)" stroke-width="2.2">
-    <path d="M28 14 L40 26 L28 38 L16 26 Z"/>
-    <path d="M28 14 L28 38 M16 26 L40 26"/>
+<!-- ============================================================================
+     PLACEHOLDER LOGO (header lockup) = reconstructed BY EYE from the supplied artwork.
+     The curves and proportions are an APPROXIMATION, not the real brand file.
+     Replace with the original vector when you have it, keeping this filename.
+     ============================================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="49 62 863 259" role="img" aria-label="Oh! Gift">
+  <title>Oh! Gift</title>
+  <!-- ================ mark ================ -->
+  <g>
+    <!-- open red ring with the G crossbar -->
+    <path d="M 239 113 A 100 100 0 1 0 272 216"
+          fill="none" stroke="#E30613" stroke-width="28" stroke-linecap="round"/>
+    <path d="M 272 216 L 208 216"
+          fill="none" stroke="#E30613" stroke-width="28" stroke-linecap="round"/>
+
+    <!-- gift box: body, vertical ribbon band, lid -->
+    <rect x="130" y="207" width="92" height="88" fill="#DFC09A"/>
+    <rect x="168" y="207" width="16" height="88" fill="#C9A87C"/>
+    <rect x="122" y="186" width="108" height="24" rx="3" fill="#EBD6B8"/>
+    <rect x="168" y="186" width="16" height="24" fill="#C9A87C"/>
+
+    <!-- ribbon bow: two loops splayed outward from the knot -->
+    <g fill="none" stroke="#E30613" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 176 182 C 158 168 128 161 126 143 C 124 129 143 125 155 137 C 167 149 174 166 176 182 Z"/>
+      <path d="M 176 182 C 194 168 224 161 226 143 C 228 129 209 125 197 137 C 185 149 178 166 176 182 Z"/>
+    </g>
+    <circle cx="176" cy="184" r="9" fill="#E30613"/>
+
+    <!-- heart, upper right -->
+    <path d="M 292 140 C 292 140 263 121 263 103 C 263 91 274 85 282 89
+             C 287 92 290 96 292 100 C 294 96 297 92 302 89 C 310 85 321 91 321 103
+             C 321 121 292 140 292 140 Z" fill="#E30613"/>
   </g>
-  <text x="56" y="34" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif"
-        font-size="34" font-weight="600" fill="url(#rg)">Oh!</text>
-  <text x="118" y="34" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif"
-        font-size="34" font-weight="500" fill="#2A2422">Gift</text>
-  <text x="56" y="52" font-family="Inter,Manrope,system-ui,sans-serif" font-size="9"
-        letter-spacing="3.4" fill="#8E4A56">PREMIUM GIFTING</text>
+  <!-- ================ wordmark ================
+       Live text, not outlines, so you can still edit it. Falls back to
+       Georgia/Times when loaded via <img> (page webfonts don't apply there). -->
+  <text id="wm" x="392" y="258" fill="#E30613" font-size="136" font-weight="500"
+        font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif">OH! Gift</text>
+  <path id="gheart" transform="translate(31 0)"
+        d="M 686 128 C 686 128 670 117 670 107 C 670 100 676 97 681 99
+           C 684 101 685 103 686 105 C 687 103 689 101 692 99 C 697 97 703 100 703 107
+           C 703 117 686 128 686 128 Z" fill="#E30613"/>
 </svg>

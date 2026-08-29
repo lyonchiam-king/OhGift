@@ -1,9 +1,9 @@
 <!-- ============================================================================
-     PLACEHOLDER LOGO (footer lockup, light type) = reconstructed BY EYE from the supplied artwork.
+     PLACEHOLDER LOGO (full lockup with tagline) = reconstructed BY EYE from the supplied artwork.
      The curves and proportions are an APPROXIMATION, not the real brand file.
      Replace with the original vector when you have it, keeping this filename.
      ============================================================================ -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="49 62 863 259" role="img" aria-label="Oh! Gift">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="49 62 952 292" role="img" aria-label="Oh! Gift">
   <title>Oh! Gift</title>
   <!-- ================ mark ================ -->
   <g>
@@ -34,10 +34,12 @@
   <!-- ================ wordmark ================
        Live text, not outlines, so you can still edit it. Falls back to
        Georgia/Times when loaded via <img> (page webfonts don't apply there). -->
-  <text id="wm" x="392" y="258" fill="#FDF9F5" font-size="136" font-weight="500"
+  <text id="wm" x="392" y="258" fill="#E30613" font-size="136" font-weight="500"
         font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif">OH! Gift</text>
   <path id="gheart" transform="translate(31 0)"
         d="M 686 128 C 686 128 670 117 670 107 C 670 100 676 97 681 99
            C 684 101 685 103 686 105 C 687 103 689 101 692 99 C 697 97 703 100 703 107
-           C 703 117 686 128 686 128 Z" fill="#F08A92"/>
+           C 703 117 686 128 686 128 Z" fill="#E30613"/>
+  <text id="tag" x="394" y="322" fill="#E30613" font-size="25" letter-spacing="2.5"
+        font-family="Inter, Manrope, 'Segoe UI', system-ui, sans-serif">Customised gifts, meaningful moments</text>
 </svg>

@@ -43,7 +43,7 @@ window.SITE_CONFIG = {
   },
 
   /* --- 5. Tagline --------------------------------------------------------- */
-  TAGLINE: "Gifts worth an Oh!",                 // TODO: your real tagline
+  TAGLINE: "Customised gifts, meaningful moments",
 
   /* --- 6. Form endpoints --------------------------------------------------
      Both forms POST here. Pick ONE approach and put the URL in.

@@ -231,13 +231,23 @@
         var want = btn.dataset.filter;
         buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
 
+        // let motion.js measure positions before the layout changes (FLIP)
+        document.dispatchEvent(new CustomEvent("giftfilter:before"));
+
         var shown = 0;
         cards.forEach(function (card) {
           var cats = (card.dataset.cat || "").split(/\s+/);
           var show = want === "all" || cats.indexOf(want) !== -1;
           card.hidden = !show;
-          if (show) shown++;
+          if (show) {
+            // A card filtered into view must be visible at once — it must not
+            // sit at opacity 0 waiting on the scroll-reveal observer.
+            card.classList.add("is-in");
+            shown++;
+          }
         });
+
+        document.dispatchEvent(new CustomEvent("giftfilter:after"));
 
         if (status) {
           status.textContent = shown + (shown === 1 ? " gift" : " gifts") +
@@ -366,6 +376,7 @@
         window.location.href = mailtoFallback(opts.subject, data);
         window.setTimeout(function () {
           showStatus(status, "ok", opts.successMsg);
+          document.dispatchEvent(new CustomEvent("ohgift:success"));
           opts.onSuccess && opts.onSuccess(data);
           form.reset();
         }, 900);
@@ -383,6 +394,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
           showStatus(status, "ok", opts.successMsg);
+          document.dispatchEvent(new CustomEvent("ohgift:success"));
           opts.onSuccess && opts.onSuccess(data);
           form.reset();
         })
