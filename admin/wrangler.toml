@@ -1,0 +1,10 @@
+# Deploys the OAuth worker below (admin/oauth-worker.js) to Cloudflare.
+# Used only for the one-time setup — deploy with:  npx wrangler deploy
+# (run from this admin/ folder).
+name = "ohgift-cms-auth"
+main = "oauth-worker.js"
+compatibility_date = "2026-08-01"
+
+# Secrets (GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET) and variables
+# (ALLOWED_DOMAINS) are set in the Cloudflare dashboard:
+# Workers & Pages -> ohgift-cms-auth -> Settings -> Variables & Secrets.

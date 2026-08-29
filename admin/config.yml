@@ -16,8 +16,8 @@ backend:
   name: github
   repo: lyonchiam-king/OhGift
   branch: main
-  # --- replace this placeholder after deploying the worker ---
-  base_url: https://REPLACE-ME.workers.dev
+  # --- deployed via wrangler; see admin/oauth-worker.js for setup ---
+  base_url: https://ohgift-cms-auth.lyon-chiam.workers.dev
   auth_endpoint: auth
 
 site_url: https://ohgift.coai.international
