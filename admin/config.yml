@@ -1,0 +1,81 @@
+#
+# Oh! Gift — Decap CMS configuration
+# This powers the page at  https://ohgift.coai.international/admin
+#
+# ============================================================
+# >>> ONE PLACEHOLDER TO FILL IN (one time) <<<
+# After you deploy the OAuth worker (see admin/oauth-worker.js for the
+# step-by-step), paste the worker's URL below — no trailing slash:
+#
+#     base_url: https://ohgift-cms-auth.<your-name>.workers.dev
+#
+# Until then, the admin page cannot save. Everything else works.
+# ============================================================
+
+backend:
+  name: github
+  repo: lyonchiam-king/OhGift
+  branch: main
+  # --- replace this placeholder after deploying the worker ---
+  base_url: https://REPLACE-ME.workers.dev
+  auth_endpoint: auth
+
+site_url: https://ohgift.coai.international
+logo_url: /assets/logo.svg
+
+# Where the CMS puts uploaded photos, and the URL they are served from.
+media_folder: "assets/gifts/uploads"
+public_folder: "/assets/gifts/uploads"
+
+publish_mode: ""
+
+collections:
+  - name: gifts
+    label: Gifts
+    label_singular: gift
+    files:
+      - name: gifts
+        label: Gift catalogue
+        label_singular: gift
+        file: assets/data/gifts.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: gifts
+            label: Gifts (in display order — top of list shows first)
+            widget: list
+            collapsed: true
+            fields:
+              - name: id
+                label: Short ID (internal)
+                widget: string
+                hint: "Unique short name — lowercase letters, numbers, dashes (e.g. cny-prosperity-hamper)"
+              - name: name
+                label: Gift name
+                widget: string
+              - name: price
+                label: "Price — RM (shown as “From RM …”)"
+                widget: number
+                min: 0
+                value_type: int
+              - name: tag
+                label: Label shown on the photo
+                widget: string
+                default: Client & VIP
+              - name: cats
+                label: Appears under which filter chips?
+                widget: select
+                multiple: true
+                options: [cny, raya, deepavali, christmas, vip]
+                hint: cny = Chinese New Year, raya = Hari Raya, vip = Client & VIP
+              - name: image
+                label: Photo
+                widget: image
+                hint: Upload straight from your computer — portraits around 800×1000 look best
+              - name: alt
+                label: Photo alt text (for accessibility / SEO)
+                widget: string
+                required: false
+              - name: desc
+                label: Description
+                widget: text

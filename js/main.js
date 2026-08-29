@@ -210,20 +210,97 @@
 
   /* ------------------------------------------------ 6. scroll reveal ----- */
 
-  function initReveal() {
-    var items = $$(".reveal");
+  var revealIO = null;
+
+  function revealAll(items) {
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
       items.forEach(function (el) { el.classList.add("is-in"); });
       return;
     }
-    var io = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-in");
-        obs.unobserve(entry.target);
+    if (!revealIO) {
+      revealIO = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          obs.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }
+    items.forEach(function (el) { revealIO.observe(el); });
+  }
+
+  function initReveal() {
+    revealAll($$(".reveal"));
+  }
+
+  /* ----------------------------------------- 6b. gift catalogue data ----- */
+  /* The grid is rendered from assets/data/gifts.json — edit it at /admin/
+     rather than touching this file. Rendering must complete before the
+     filter buttons, quote/WhatsApp actions and motion effects bind, so
+     those wait for the gifts:ready event below. */
+
+  var escapeHTML = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  };
+
+  var WA_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Zm0 17.94h-.01a8.2 8.2 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.14 8.14 0 0 1-1.25-4.34c0-4.52 3.68-8.2 8.2-8.2a8.15 8.15 0 0 1 8.19 8.2c0 4.52-3.68 8.18-8.19 8.18Zm5.43-5.56c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.2 5.07 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>';
+
+  function giftCardHTML(g, i) {
+    var cats = (g.cats || []).join(" ");
+    var delay = ["", " d1", " d2", " d3"][i % 4];
+    var name = escapeHTML(g.name);
+    var price = escapeHTML(String(g.price));
+    return (
+      '<article class="gift-card reveal' + delay + '" ' +
+        'data-cat="' + escapeHTML(cats) + '" ' +
+        'data-gift="' + name + '" ' +
+        'data-price="RM ' + price + '">' +
+        '<div class="gift-card__media">' +
+          '<img src="' + escapeHTML(g.image) + '" alt="' + escapeHTML(g.alt || g.name) + '" ' +
+            'width="800" height="1000" loading="lazy" decoding="async">' +
+          '<span class="gift-card__tag">' + escapeHTML(g.tag || "") + '</span>' +
+        '</div>' +
+        '<div class="gift-card__body">' +
+          '<h3>' + name + '</h3>' +
+          '<p class="gift-card__desc">' + escapeHTML(g.desc || "") + '</p>' +
+          '<p class="gift-card__price">From <strong>RM ' + price + '</strong></p>' +
+          '<div class="gift-card__actions">' +
+            '<button class="btn btn--ghost btn--sm" type="button" data-quote>Add to quote</button>' +
+            '<button class="icon-btn" type="button" data-wa-item aria-label="Ask about ' + name + ' on WhatsApp">' +
+              WA_SVG +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function initGifts() {
+    var grid = $("#gift-grid");
+    if (!grid) return;
+
+    fetch("assets/data/gifts.json")
+      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function (data) {
+        var gifts = data.gifts || [];
+        grid.insertAdjacentHTML("beforeend", gifts.map(giftCardHTML).join(""));
+        // grid children carry .reveal — hook them into the same observer,
+        // then let filters, quote/WhatsApp buttons and motion.js bind
+        grid.querySelectorAll(".gift-card").forEach(function (card) { revealAll([card]); });
+        initFilters();
+        initGiftActions();
+
+        document.documentElement.setAttribute("data-gifts", "ready");
+        document.dispatchEvent(new CustomEvent("gifts:ready"));
+      })
+      .catch(function (err) {
+        console.error("Could not load the gift catalogue", err);
+        grid.insertAdjacentHTML("beforeend",
+          '<p style="max-width:60ch;margin:0 auto">The catalogue could not be loaded. ' +
+          'Please WhatsApp us and we will send it over.</p>');
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
   }
 
   /* -------------------------------------------- 7. catalogue filters ----- */
@@ -471,8 +548,7 @@
     initMobileNav();
     initScrollSpy();
     initReveal();
-    initFilters();
-    initGiftActions();
+    initGifts();
     initForms();
   }
 

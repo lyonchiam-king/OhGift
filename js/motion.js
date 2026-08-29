@@ -444,6 +444,7 @@
   /* ------------------------------------------------ 15. blur-up --------- */
   function blurUp() {
     $$("main img, .footer img").forEach(function (img) {
+      if (img.hasAttribute("data-blurup")) return;
       if (img.closest(".header__logo") || img.src.indexOf("logo") !== -1) return;
       img.setAttribute("data-blurup", "");
       if (img.complete && img.naturalWidth) img.classList.add("is-loaded");
@@ -502,15 +503,21 @@
   }
 
   /* ------------------------------------------------------- boot ---------- */
+  /* The gift grid renders from assets/data/gifts.json, so card-bound
+     effects wait for main.js to fire gifts:ready (or run immediately if
+     cards are already in the DOM). */
+  function giftsLoaded(fn) {
+    if (document.documentElement.getAttribute("data-gifts") === "ready") { fn(); return; }
+    document.addEventListener("gifts:ready", fn, { once: true });
+  }
+
   function init() {
     preloader();
     heroHeadline();
     heroFloaters();
     heroSpotlight();
-    cardSweep();
     dividers();
     iconDraw();
-    cardTilt();
     filterFlip();
     buttonFx();
     countUp();
@@ -518,6 +525,12 @@
     howSteps();
     menuStagger();
     blurUp();
+    giftsLoaded(function () {
+      cardSweep();
+      cardTilt();
+      // re-scan so newly rendered card images get the blur-up treatment too
+      blurUp();
+    });
     scrollProgress();
     parallax();
 

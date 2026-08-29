@@ -18,6 +18,10 @@ desktop.ini
 .env
 .env.*
 
+# Agent tooling state (never commit)
+.claude/
+.claude-flow/
+
 # Host build output (none needed — this is a static site)
 node_modules/
 dist/
