@@ -70,17 +70,17 @@
 }
 .hero__mesh span:nth-child(1) {
   width: 46%; height: 62%; left: 4%;  top: 6%;
-  background: radial-gradient(circle, rgba(227,6,19,.20), transparent 68%);
+  background: radial-gradient(circle, rgba(216,0,0,.20), transparent 68%);
   animation: mesh-a 23s var(--ease-soft) infinite alternate;
 }
 .hero__mesh span:nth-child(2) {
   width: 52%; height: 58%; left: 42%; top: 24%;
-  background: radial-gradient(circle, rgba(201,162,39,.24), transparent 68%);
+  background: radial-gradient(circle, rgba(219,183,137,.34), transparent 68%);
   animation: mesh-b 29s var(--ease-soft) infinite alternate;
 }
 .hero__mesh span:nth-child(3) {
   width: 40%; height: 50%; left: 22%; top: 44%;
-  background: radial-gradient(circle, rgba(122,28,39,.20), transparent 68%);
+  background: radial-gradient(circle, rgba(140,17,22,.20), transparent 68%);
   animation: mesh-c 34s var(--ease-soft) infinite alternate;
 }
 @keyframes mesh-a { to { transform: translate3d(14%, 10%, 0) scale(1.22); } }
@@ -126,7 +126,7 @@
 .hero__spotlight {
   position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
   background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%),
-              rgba(227,6,19,.10), rgba(201,162,39,.06) 42%, transparent 72%);
+              rgba(216,0,0,.11), rgba(219,183,137,.10) 42%, transparent 72%);
   transition: opacity .45s var(--ease-soft);
 }
 .hero.has-spotlight .hero__spotlight { opacity: 1; }
@@ -170,7 +170,7 @@
   .gift-card__media::after {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
     background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%),
-                rgba(255,255,255,.42), rgba(255,214,170,.16) 34%, transparent 62%);
+                rgba(255,255,255,.42), rgba(219,183,137,.20) 34%, transparent 62%);
     opacity: 0; transition: opacity .35s var(--ease-soft);
   }
   .gift-card:hover .gift-card__media::after { opacity: 1; }

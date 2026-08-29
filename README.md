@@ -33,7 +33,7 @@ Open it and search for `TODO` — there are 18.
 | 3 | **Phone** | `PHONE_DISPLAY`, `PHONE_TEL` | Display version is what people read; `PHONE_TEL` is what the link dials. |
 | 4 | **Quote form endpoint** | `QUOTE_FORM_ENDPOINT` | See [Wiring up the forms](#wiring-up-the-forms). |
 | 5 | **Catalogue form endpoint** | `LEAD_FORM_ENDPOINT` | Your lead-gen list. |
-| 6 | **Real logo files** | `assets/logo*.svg` | **The current ones are my reconstruction, not your artwork** — see [The logo](#the-logo). |
+| ~~6~~ | ~~Logo files~~ | ✅ **Done** | Extracted as true vectors from your `ohgift_logo_CMYK.ai` — see [The logo](#the-logo). |
 | 7 | **Product photos** | `assets/gifts/*.jpg` etc. | See [Swapping photos](#swapping-photos). |
 | 8 | **Gift names, copy, RM prices** | `index.html` → `<article class="gift-card">` blocks | See [Editing the catalogue](#editing-the-catalogue). |
 | 9 | **Catalogue PDF** | `assets/catalogue.pdf` | Overwrite the file, keep the name. |
@@ -53,29 +53,35 @@ More content `TODO`s live in `index.html` — search the file for `TODO`.
 
 ## The logo
 
-⚠️ **`assets/logo.svg`, `logo-light.svg` and `logo-full.svg` are a reconstruction
-I drew by eye from the artwork you sent.** The ring, the bow, the box and the
-heart are approximations — the curves will not match your real vector, and the
-wordmark is live text in a fallback serif rather than your actual lettering.
-**Replace all three with the original files before launch.**
+Taken straight from the `ohgift_logo_CMYK.ai` you supplied. The `.ai` is a
+PDF-compatible Illustrator file, so the artwork came across as **true vectors** —
+the real curves, the real lettering, and the tagline already outlined as paths
+(so it needs no font and can never fall back to the wrong serif).
 
-There are three because one lockup can't do every job:
+Five lockups, all from that one file:
 
 | File | Contains | Used for |
 |------|----------|----------|
-| `logo.svg` | mark + "OH! Gift" | Header (renders at 50px tall) |
-| `logo-light.svg` | same, cream type | Footer, on the dark background |
-| `logo-full.svg` | mark + wordmark + tagline | Not used on the page — for print, email signatures, socials |
+| `logo.svg` | mark + "OH! Gift", full colour | **Header** |
+| `logo-full.svg` | + tagline, full colour | Print, email signatures, socials |
+| `logo-light.svg` | reversed, cream | **Footer** |
+| `logo-light-full.svg` | reversed + tagline | Dark backgrounds elsewhere |
+| `logo-mono.svg` | single colour, + tagline | One-colour print, stamping, embossing |
+| `favicon.svg` | just the mark, cream on burgundy | Browser tab |
 
-The tagline is deliberately **not** in the header lockup: at 50px tall it would
-be about 3px of illegible smudge. It appears as real text under the hero
-headline instead, where it can actually be read.
+The header and footer versions **omit the tagline on purpose**. The header
+renders the logo at 50px tall, where the tagline would be under 3px — not small
+text but a grey smudge that makes the whole mark look dirty. The tagline appears
+as real, readable text under the hero headline instead. Use `logo-full.svg`
+wherever the lockup is reproduced large enough to read it.
 
-Swapping in your own: keep the filenames, and update `width`/`height` on the two
-`<img>` tags in `index.html` to your file's real dimensions (they're currently
-`863`×`259`) so the page doesn't shift while loading. Display size is set in CSS.
+### If you ever need to regenerate them
 
-The browser-tab icon is **`assets/favicon.svg`**.
+They were rebuilt from the vector data rather than cropped out of the PDF, for
+two reasons: a crop carries every other lockup on the sheet along with it (about
+100KB of invisible clipped paths), and rendering the file's CMYK gives `#ee2836`
+rather than the `#d80000` your own swatch declares. Reading the geometry
+directly gave clean 12KB files painted with the exact brand hexes.
 
 ---
 
@@ -167,18 +173,23 @@ Both forms carry a hidden honeypot field (`_gotcha`) that absorbs most bot spam.
 The palette lives at the top of `css/styles.css`:
 
 ```css
---brand:       #7A1C27;   /* deep burgundy — text, links, buttons  9.84:1 on cream */
---brand-mid:   #96222F;   /* button gradients, hover               8.18:1 vs white */
---brand-light: #B8636D;   /* DECORATIVE only — borders, gradients */
---brand-pale:  #D9A6AB;   /* DECORATIVE only */
---brand-red:   #E30613;   /* your logo red — accents only */
---kraft:       #DFC09A;   /* the tan from the logo's gift box */
---gold:        #C9A227;   /* metallic thread in the dividers */
+--brand-red:   #D80000;   /* EXACT brand red   — from your logo's own swatch */
+--kraft:       #DBB789;   /* EXACT brand kraft — from your logo's own swatch */
+
+--brand:       #8C1116;   /* deep burgundy — text, links, buttons  9.02:1 on cream */
+--brand-mid:   #A81419;   /* button gradients, hover               7.56:1 vs white */
+--brand-light: #BE5F5F;   /* DECORATIVE only — borders, gradients */
+--brand-pale:  #E2A9A9;   /* DECORATIVE only */
+--gold:        #C39C63;   /* deepened kraft — the metallic thread in the dividers */
 ```
 
-The site runs on **deep burgundy** with your **bright logo red** kept as an
-accent — that's the direction you picked, and it's why the buttons and body
-links are wine rather than pillarbox red.
+The red and the kraft are the **exact values your brand sheet declares**, read
+out of the `.ai` file rather than sampled from a render.
+
+The site runs on **deep burgundy** with the brand red kept as an accent — the
+direction you picked. The burgundy is that red darkened until it is safely
+readable: `#D80000` itself only reaches 4.6:1 on cream, which passes but leaves
+no headroom, and it is tiring as body-text colour across a long page.
 
 **If you change these:** `--brand` is used for every piece of readable text and
 every button, so it must stay dark enough for **4.5:1 against the cream
@@ -282,9 +293,11 @@ js/
   main.js               Behaviour: nav, filters, forms, SEO schema.
   motion.js             All animation behaviour. Safe to delete.
 assets/
-  logo.svg              Header lockup        ← replace with your real artwork
-  logo-light.svg        Footer lockup        ← replace
-  logo-full.svg         Full lockup+tagline  ← replace
+  logo.svg              Header lockup, colour        (from your .ai)
+  logo-full.svg         Colour lockup + tagline      (from your .ai)
+  logo-light.svg        Footer lockup, reversed      (from your .ai)
+  logo-light-full.svg   Reversed + tagline           (from your .ai)
+  logo-mono.svg         Single-colour + tagline      (from your .ai)
   favicon.svg           Browser tab icon
   hero.jpg  corporate.jpg  personal.jpg  about.jpg
   og-image.jpg          Social share card
@@ -315,7 +328,7 @@ assets/
 
 ## Known placeholders
 
-The site is complete and working, but ships with **sample content**: a
-reconstructed logo, eight invented gifts with indicative RM prices, invented
-volume tiers, invented About statistics, and generated placeholder images.
-Replace all of it before launch — see the checklist at the top.
+The logo and brand colours are now real. Still **sample content**: eight
+invented gifts with indicative RM prices, invented volume tiers, invented About
+statistics, and generated placeholder images. Replace all of it before launch —
+see the checklist at the top.

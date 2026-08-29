@@ -431,7 +431,7 @@
      removes itself; nothing persists between bursts. */
   function confetti() {
     if (REDUCED) return;
-    var colours = ["#E30613", "#7A1C27", "#C9A227", "#DFC09A", "#96222F", "#FDF9F5"];
+    var colours = ["#D80000", "#8C1116", "#DBB789", "#C39C63", "#A81419", "#FDF9F5"];
     var c = document.createElement("canvas");
     c.setAttribute("aria-hidden", "true");
     c.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:350";
