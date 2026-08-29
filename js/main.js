@@ -137,9 +137,17 @@
     var waFloat = $("#wa-float");
     if (!header) return;
 
+    var lastY = 0;
     var onScroll = function () {
       var y = window.pageYOffset || document.documentElement.scrollTop;
       header.classList.toggle("is-stuck", y > 8);
+      // hide past the trust strip while scrolling down, reveal on any
+      // upward move — never while the mobile menu is open
+      if (!document.body.classList.contains("nav-open")) {
+        if (y > 320 && y > lastY + 4) header.classList.add("is-hidden");
+        else if (y <= 320 || y < lastY - 4) header.classList.remove("is-hidden");
+      }
+      lastY = y;
       if (waFloat) waFloat.classList.toggle("is-visible", y > 420);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -226,9 +234,18 @@
     var status  = $("#filter-status");
     if (!buttons.length || !cards.length) return;
 
+    // Remember each card's own tag so filtering can swap it for the active
+    // occasion and restore it when "All gifts" is selected again.
+    var originalTags = {};
+    cards.forEach(function (card) {
+      var tag = card.querySelector(".gift-card__tag");
+      if (tag) originalTags[card.dataset.gift] = tag.textContent;
+    });
+
     buttons.forEach(function (btn) {
       btn.addEventListener("click", function () {
         var want = btn.dataset.filter;
+        var label = btn.textContent.trim();
         buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
 
         // let motion.js measure positions before the layout changes (FLIP)
@@ -244,6 +261,10 @@
             // sit at opacity 0 waiting on the scroll-reveal observer.
             card.classList.add("is-in");
             shown++;
+            // The tag follows the occasion you're browsing, not the card's
+            // default — a CNY gift under the CNY filter reads "Chinese New Year".
+            var tag = card.querySelector(".gift-card__tag");
+            if (tag) tag.textContent = want === "all" ? originalTags[card.dataset.gift] : label;
           }
         });
 
@@ -251,7 +272,7 @@
 
         if (status) {
           status.textContent = shown + (shown === 1 ? " gift" : " gifts") +
-                               " shown for " + btn.textContent.trim() + ".";
+                               " shown for " + label + ".";
         }
       });
     });

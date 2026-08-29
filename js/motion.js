@@ -116,11 +116,9 @@
     if (!host || REDUCED) return;
     // deterministic-ish scatter, kept clear of the copy column on desktop
     var specs = [
-      { l: 62, t: 14, s: 90,  cls: "",      dx: 22,  dy: -30, dr: 14, dur: 19 },
       { l: 78, t: 46, s: 54,  cls: "box",   dx: -18, dy: 24,  dr: -12, dur: 23 },
       { l: 88, t: 20, s: 26,  cls: "spark", dx: 14,  dy: 20,  dr: 40, dur: 15 },
       { l: 55, t: 70, s: 34,  cls: "spark", dx: -12, dy: -22, dr: -30, dur: 21 },
-      { l: 70, t: 82, s: 68,  cls: "",      dx: 18,  dy: -18, dr: 10, dur: 26 },
       { l: 92, t: 66, s: 42,  cls: "box",   dx: -14, dy: -16, dr: 16, dur: 17 }
     ];
     specs.forEach(function (s, n) {
@@ -149,9 +147,17 @@
         pending = false;
         spot.style.setProperty("--mx", mx + "%");
         spot.style.setProperty("--my", my + "%");
+        // unitless percentages — the depth collage multiplies them by
+        // per-layer pixel depths (hero__photo / hero__spark in motion.css)
+        hero.style.setProperty("--mx", mx.toFixed(2));
+        hero.style.setProperty("--my", my.toFixed(2));
       });
     });
-    hero.addEventListener("pointerleave", function () { hero.classList.remove("has-spotlight"); });
+    hero.addEventListener("pointerleave", function () {
+      hero.classList.remove("has-spotlight");
+      hero.style.removeProperty("--mx");
+      hero.style.removeProperty("--my");
+    });
     hero.addEventListener("pointerenter", function () { hero.classList.add("has-spotlight"); });
   }
 
@@ -180,7 +186,10 @@
         var speed = parseFloat(el.dataset.parallax) || 0.12;
         // -1 .. 1 across the viewport
         var t = (r.top + r.height / 2 - vh / 2) / vh;
-        el.style.transform = "translate3d(0," + (t * speed * 100).toFixed(2) + "px,0)";
+        // scale(1.05) oversizes the image so the translate never reveals the
+        // container's edges — the hero and section photos fill their boxes
+        // exactly, and without this the parallax shows cream gaps top/bottom.
+        el.style.transform = "translate3d(0," + (t * speed * 100).toFixed(2) + "px,0) scale(1.05)";
       }
     });
   }
@@ -247,6 +256,21 @@
     });
   }
 
+  /* --------------------------------- 8b. card shine sweep --------------- */
+  /* Card A from the variant preview: a warm light sweeps across each gift
+     photo as the card is hovered/tilted. Decorative — injected only if JS
+     runs, and hidden outright under reduced motion. */
+  function cardSweep() {
+    $$(".gift-card").forEach(function (card) {
+      var media = $(".gift-card__media", card);
+      if (!media || $(".gift-card__sweep", media)) return;
+      var s = document.createElement("span");
+      s.className = "gift-card__sweep";
+      s.setAttribute("aria-hidden", "true");
+      media.appendChild(s);
+    });
+  }
+
   /* ----------------------------------- 9. FLIP layout on filtering ------- */
   /* main.js fires these two events around the hidden-attribute change. */
   function filterFlip() {
@@ -297,7 +321,7 @@
   /* ---------------------------------------- 10. buttons: ripple + magnet - */
   function buttonFx() {
     document.addEventListener("pointerdown", function (e) {
-      var btn = e.target.closest && e.target.closest(".btn");
+      var btn = e.target.closest && e.target.closest(".btn, .filter");
       if (!btn || REDUCED) return;
       var r = btn.getBoundingClientRect();
       var size = Math.max(r.width, r.height);
@@ -310,13 +334,15 @@
     });
 
     if (REDUCED || !FINE) return;
-    $$(".btn--primary, .wa-float").forEach(function (btn) {
+    $$(".btn--primary, .wa-float, .filter").forEach(function (btn) {
+      var chip = btn.classList.contains("filter");
+      var fx = chip ? .14 : .22, fy = chip ? .16 : .3;   // chips pull more gently
       btn.classList.add("is-magnetic");
       var raf = false, tx = 0, ty = 0;
       btn.addEventListener("pointermove", function (e) {
         var r = btn.getBoundingClientRect();
-        tx = (e.clientX - (r.left + r.width / 2)) * .22;
-        ty = (e.clientY - (r.top + r.height / 2)) * .3;
+        tx = (e.clientX - (r.left + r.width / 2)) * fx;
+        ty = (e.clientY - (r.top + r.height / 2)) * fy;
         btn.classList.add("is-pulling");
         if (raf) return;
         raf = true;
@@ -481,6 +507,7 @@
     heroHeadline();
     heroFloaters();
     heroSpotlight();
+    cardSweep();
     dividers();
     iconDraw();
     cardTilt();

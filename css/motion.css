@@ -208,12 +208,14 @@
 .btn:active { transform: translateY(1px) scale(.985); }
 
 /* ripple */
-.btn .ripple {
+.btn .ripple, .filter .ripple {
   position: absolute; border-radius: 50%; pointer-events: none;
   background: rgba(255,255,255,.4); transform: scale(0); opacity: .75;
   animation: ripple .62s var(--ease-out) forwards;
 }
 .btn--ghost .ripple { background: rgba(122,28,39,.18); }
+.filter .ripple { background: rgba(140,17,22,.14); }
+.filter { position: relative; overflow: hidden; isolation: isolate; }
 @keyframes ripple { to { transform: scale(2.6); opacity: 0; } }
 
 /* magnetic pull (desktop only, applied by JS) */
@@ -398,4 +400,110 @@ img[data-blurup].is-loaded { opacity: 1; filter: none; transform: none; }
   .mobile-nav li, .mobile-nav .btn { opacity: 1; transform: none; animation: none !important; }
 
   img[data-blurup] { opacity: 1; filter: none; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   17. INTERACTIVITY UPGRADE
+   --------------------------------------------------------------------------
+   Hero depth collage (cursor-parallax gift photos), Card A shine sweep,
+   magnetic filter chips, hide-on-scroll header, "Oh!" shimmer.
+   All decorative — the page is complete without this section.
+   ========================================================================== */
+
+/* ------------------- Hero II: depth collage ------------------ */
+/* Framed gift photos that float on separate parallax depths.
+   The pointer writes --mx/--my (0-100) on the hero in motion.js;
+   each layer multiplies by its own --depth, so near layers move
+   more than far ones. No JS? The photos still entrance — animating
+   from the same offset keyframe — they just don't track the cursor. */
+.hero__collage { position: absolute; inset: 0; z-index: 1; pointer-events: none; display: none; }
+@media (min-width: 1100px) { .hero__collage { display: block; } }
+
+.hero__photo {
+  position: absolute; display: block; overflow: hidden;
+  aspect-ratio: 4 / 5; border-radius: 14px;
+  border: 5px solid var(--white);
+  box-shadow: var(--shadow-lg);
+  will-change: transform;
+  transform:
+    translate3d(calc((var(--mx, 50) - 50) * var(--depth, 6px)),
+                calc((var(--my, 50) - 50) * calc(var(--depth, 6px) * .7)), 0)
+    rotate(var(--rot, 0deg));
+  animation: collage-in .9s var(--ease-out) both;
+  animation-delay: var(--enter, .5s);
+}
+@keyframes collage-in {
+  from { opacity: 0; transform: translate3d(48px, 34px, 0) rotate(var(--rot, 0deg)) scale(.94); }
+  to   { opacity: 1; transform:
+    translate3d(calc((var(--mx, 50) - 50) * var(--depth, 6px)),
+                calc((var(--my, 50) - 50) * calc(var(--depth, 6px) * .7)), 0)
+    rotate(var(--rot, 0deg)); }
+}
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* three frames, staggered entrance, near-to-far depths */
+.hero__photo--1 { right: 7%;  top: 9%;    width: 225px; --depth: 6px;  --rot: 3deg;  --enter: .55s; }
+.hero__photo--2 { right: 25%; bottom: 5%; width: 180px; --depth: 11px; --rot: -5deg; --enter: .72s; }
+.hero__photo--3 { right: 2%;  bottom: 26%; width: 138px; --depth: 16px; --rot: 6deg;  --enter: .9s; }
+
+/* gold sparks drift deepest */
+.hero__spark {
+  position: absolute; width: 9px; height: 9px; border-radius: 50%;
+  background: radial-gradient(circle, var(--gold) 0%, rgba(195,156,99,.55) 60%, transparent 75%);
+  box-shadow: 0 0 12px rgba(195, 156, 99, .5);
+  transform: translate3d(calc((var(--mx, 50) - 50) * 1.9px), calc((var(--my, 50) - 50) * 1.5px), 0);
+}
+.hero__spark--sm { width: 6px; height: 6px; opacity: .8; }
+
+/* ------------------- Card A: shine sweep + underline --------- */
+/* Injected by motion.js (cardSweep). Decorative only. */
+.gift-card__sweep {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 38%,
+              rgba(255, 244, 230, .34) 47%, rgba(255, 248, 240, .62) 50%,
+              rgba(255, 244, 230, .34) 53%, transparent 62%);
+  transform: translateX(-130%);
+}
+.gift-card:hover .gift-card__sweep,
+.gift-card.is-tilting .gift-card__sweep {
+  opacity: 1; transform: translateX(130%);
+  transition: transform .75s cubic-bezier(.3, .6, .2, 1);
+}
+
+/* hairline brand underline draws under the gift name on hover */
+.gift-card__body h3 { position: relative; width: fit-content; }
+.gift-card__body h3::after {
+  content: ""; position: absolute; left: 0; bottom: -5px;
+  width: 100%; height: 2px; border-radius: 2px;
+  background: var(--brand-grad);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .45s var(--ease-out);
+}
+.gift-card:hover .gift-card__body h3::after { transform: scaleX(1); }
+
+/* ------------------- "Oh!" gold shimmer ---------------------- */
+.hero h1 .oh {
+  background-image: linear-gradient(110deg, #D80000 0%, #C39C63 30%, #D80000 60%);
+  background-size: 220% auto;
+  animation: oh-shimmer 6.5s ease-in-out infinite;
+}
+@keyframes oh-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ------------------- Hide-on-scroll header ------------------- */
+.header { transition-property: background-color, box-shadow, border-color, transform; }
+.header.is-hidden { transform: translateY(-102%); }
+body.nav-open .header { transform: none !important; }
+
+/* ------------------- Reduced motion fallbacks ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo { animation: none !important; opacity: 1;
+    transform: rotate(var(--rot, 0deg)); }
+  .hero__spark { display: none; }
+  .hero h1 .oh { animation: none; background-image: var(--brand-grad); background-size: auto; }
+  .gift-card__sweep { display: none; }
+  .gift-card__body h3::after { transition: none; }
+  .header, .header.is-hidden { transition: none; transform: none; }
 }

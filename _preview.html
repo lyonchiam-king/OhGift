@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oh! Gift — Variant Preview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;650&display=swap">
+<style>
+/* ---- same tokens as styles.css ---- */
+:root{
+  --brand-red:#D80000; --kraft:#DBB789;
+  --brand:#8C1116; --brand-mid:#A81419; --brand-light:#BE5F5F; --brand-pale:#E2A9A9;
+  --brand-tint:#FBEDEC; --gold:#C39C63;
+  --champagne:#E9D6BF; --champagne-l:#F3E8DA; --cream:#FDF9F5; --cream-warm:#FCF5EC; --white:#fff;
+  --ink:#2A2422; --ink-soft:#3D3532; --muted:#6B605C; --line:#EBDFD2;
+  --brand-grad:linear-gradient(135deg,#D80000 0%,#A81419 50%,#8C1116 100%);
+  --brand-grad-deep:linear-gradient(135deg,#A81419 0%,#8C1116 52%,#720C10 100%);
+  --btn-grad:linear-gradient(135deg,#A81419 0%,#8C1116 100%);
+  --metal-line:linear-gradient(90deg,transparent,#F0E2CA,var(--kraft),#F0E2CA,transparent);
+  --font-serif:"Cormorant Garamond",Georgia,serif;
+  --font-sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --shadow-md:0 8px 28px rgba(142,74,86,.10);
+  --shadow-lg:0 18px 48px rgba(142,74,86,.14);
+  --radius:18px; --radius-pill:999px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sans);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.15;margin:0 0 .5em;color:var(--ink)}
+p{margin:0 0 1.1em}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(1.15rem,4vw,2.5rem)}
+.eyebrow{display:inline-block;font-size:.74rem;font-weight:650;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin-bottom:.9rem}
+.lede{color:var(--muted);max-width:62ch}
+.bar{position:sticky;top:0;z-index:50;background:rgba(140,17,22,.97);color:#fff;padding:.7rem 1rem;text-align:center;font-size:.83rem;letter-spacing:.04em}
+.bar strong{font-weight:650}
+.bar span{opacity:.75}
+hr{border:0;height:1px;background:var(--metal-line);margin:0}
+.v-label{margin:3.2rem 0 1rem;font-size:.78rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.v-label b{color:var(--brand)}
+.hint{font-size:.85rem;color:var(--muted);margin:.2rem 0 1.4rem}
+.note{font-size:.82rem;color:var(--muted);opacity:.85;margin-top:.6rem}
+
+/* ---- gift card skeleton (matches index.html) ---- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.gift-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md)}
+.gift-card__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--champagne-l)}
+.gift-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.gift-card__tag{position:absolute;top:.8rem;left:.8rem;background:rgba(253,249,245,.92);color:var(--brand);font-size:.68rem;font-weight:650;letter-spacing:.1em;text-transform:uppercase;padding:.32rem .7rem;border-radius:var(--radius-pill)}
+.gift-card__body{padding:1.25rem 1.3rem 1.4rem;display:flex;flex-direction:column;flex:1}
+.gift-card__body h3{margin-bottom:.35rem;font-size:1.32rem}
+.gift-card__desc{font-size:.89rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;flex:1}
+.gift-card__price{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gift-card__price strong{font-size:1.02rem;letter-spacing:0;text-transform:none;color:var(--brand);font-family:var(--font-serif);font-size:1.15rem;font-weight:600}
+.gift-card__actions{display:grid;grid-template-columns:1fr auto;gap:.55rem;margin-top:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-family:var(--font-sans);font-size:.9rem;font-weight:600;padding:.85rem 1.5rem;border-radius:var(--radius-pill);border:1.5px solid transparent;cursor:pointer;line-height:1.2;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn--primary{background:var(--btn-grad);color:#fff;box-shadow:var(--shadow-md)}
+.btn--ghost{background:transparent;color:var(--brand);border-color:var(--brand-light)}
+.btn--sm{padding:.62rem 1.15rem;font-size:.85rem}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--brand-light);background:transparent;color:var(--brand);cursor:pointer;transition:background .18s,color .18s}
+.icon-btn svg{width:18px;height:18px;fill:currentColor}
+.icon-btn:hover{background:var(--brand-tint)}
+.wa-icon svg{fill:currentColor}
+
+/* =============== CARD VARIANT 1 — Shine sweep =============== */
+.cv1{transition:transform .35s ease,box-shadow .35s ease}
+.cv1:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.cv1 .gift-card__media img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cv1:hover .gift-card__media img{transform:scale(1.06)}
+.cv1 .sweep{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,244,230,.34) 47%,rgba(255,248,240,.62) 50%,rgba(255,244,230,.34) 53%,transparent 62%);
+  transform:translateX(-120%);transition:transform .7s cubic-bezier(.3,.6,.2,1)}
+.cv1:hover .sweep{transform:translateX(120%)}
+/* underline grows on the card name */
+.cv1 .gift-card__body h3{position:relative;width:fit-content}
+.cv1 .gift-card__body h3::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--brand-grad);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.cv1:hover .gift-card__body h3::after{transform:scaleX(1)}
+
+/* =============== CARD VARIANT 2 — CTA reveal =============== */
+.cv2{transition:transform .35s ease,box-shadow .35s ease}
+.cv2:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.cv2 .veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(114,12,16,.28) 62%,rgba(114,12,16,.72));
+  opacity:0;transition:opacity .4s ease}
+.cv2 .reveal-cta{position:absolute;inset-inline:0;bottom:0;display:flex;justify-content:center;
+  padding-bottom:1.1rem;transform:translateY(120%);transition:transform .45s cubic-bezier(.2,.7,.2,1);z-index:2}
+.cv2:hover .veil{opacity:1}
+.cv2:hover .reveal-cta{transform:translateY(0)}
+.cv2:hover .gift-card__media img{transform:scale(1.07)}
+/* price glows into brand colour; ghost button fills on hover of card */
+.cv2 .gift-card__price{transition:color .3s ease}
+.cv2:hover .gift-card__price{color:var(--brand)}
+.cv2 .wa-icon{border-color:var(--wa-green,#157F45);color:#157F45}
+.cv2 .wa-icon:hover{background:#E8F5EC}
+
+/* =============== CARD VARIANT 3 — Gradient ring + cursor glow =============== */
+.cv3{position:relative;border-color:transparent;transition:transform .35s ease,box-shadow .35s ease;--gx:50%;--gy:35%}
+.cv3::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;
+  background:conic-gradient(from var(--ring,120deg),transparent 0 68%,var(--kraft) 78%,var(--gold) 84%,var(--brand-red) 88%,var(--gold) 92%,var(--kraft) 100%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s ease;pointer-events:none}
+.cv3:hover::before{opacity:1;animation:ringspin 2.6s linear infinite}
+@property --ring{syntax:"<angle>";inherits:false;initial-value:120deg}
+@keyframes ringspin{to{--ring:480deg}}
+.cv3:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(142,74,86,.18)}
+.cv3 .glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s ease;
+  background:radial-gradient(340px circle at var(--gx) var(--gy),rgba(216,0,0,.10),transparent 65%)}
+.cv3:hover .glow{opacity:1}
+.cv3 .gift-card__media img{transition:transform .6s ease}
+.cv3:hover .gift-card__media img{transform:scale(1.05)}
+
+/* =================== HERO DEMO (shared) =================== */
+.demo-hero{position:relative;overflow:hidden;border-radius:calc(var(--radius) + 6px);
+  min-height:540px;display:flex;align-items:center;color:var(--ink)}
+.demo-hero__bg{position:absolute;inset:-8% -6%;background-size:cover;background-position:center;z-index:0}
+.demo-hero::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(253,249,245,.96) 0%,rgba(253,249,245,.88) 34%,rgba(253,249,245,.55) 55%,rgba(216,0,0,.10) 100%)}
+.demo-hero__content{position:relative;z-index:2;max-width:600px;padding:clamp(2rem,5vw,4rem)}
+.demo-hero h2{font-size:clamp(2.2rem,4.6vw,3.6rem)}
+.oh{background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;font-weight:600}
+.demo-hero .lede{color:var(--ink-soft)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+.badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--brand-tint);color:var(--brand);
+  border:1px solid var(--champagne);border-radius:var(--radius-pill);font-size:.72rem;font-weight:650;
+  letter-spacing:.12em;text-transform:uppercase;padding:.42rem .95rem;margin-bottom:1.1rem}
+
+/* ---- HERO VARIANT 1 — scroll-reactive (real page scroll drives it) ---- */
+.hv1-sticky{position:sticky;top:64px;z-index:1}
+.hv1 .demo-hero__bg{will-change:transform}
+@keyframes heroRise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.hv1 .badge{animation:heroRise .7s .15s backwards}
+.hv1 h2{animation:heroRise .8s .3s backwards}
+.hv1 .lede{animation:heroRise .8s .45s backwards}
+.hv1 .btn-row{animation:heroRise .8s .6s backwards}
+.hv1-scroller{height:70vh;overflow:hidden}
+
+/* ---- HERO VARIANT 2 — depth collage (mouse-reactive) ---- */
+.hv2{--mx:50%;--my:50%}
+.hv2 .demo-hero::after{background:linear-gradient(100deg,rgba(253,249,245,.97) 0%,rgba(253,249,245,.9) 30%,rgba(253,249,245,.5) 52%,rgba(216,0,0,.08) 100%)}
+.hv2 .layer{position:absolute;inset:-6%;z-index:1;pointer-events:none;
+  transform:translate3d(calc((var(--mx) - 50%) * .6px),calc((var(--my) - 50%) * .45px),0);
+  transition:transform .25s ease-out}
+.hv2 .float-photo{position:absolute;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);
+  border:4px solid #fff;aspect-ratio:4/5;
+  transform:translate3d(calc((var(--mx) - 50%) * var(--depth,1px)),calc((var(--my) - 50%) * calc(var(--depth,1px) * .7)),0) rotate(var(--rot,0deg));
+  transition:transform .3s ease-out}
+.hv2 .float-photo img{width:100%;height:100%;object-fit:cover}
+.hv2 .fp1{right:6%;top:12%;width:240px;--depth:6px;--rot:3deg}
+.hv2 .fp2{right:20%;bottom:8%;width:190px;--depth:10px;--rot:-5deg}
+.hv2 .fp3{right:2%;bottom:22%;width:150px;--depth:14px;--rot:6deg}
+.hv2 .spark{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--gold);opacity:.7;
+  transform:translate3d(calc((var(--mx) - 50%) * 1.8px),calc((var(--my) - 50%) * 1.4px),0);transition:transform .3s ease-out}
+@keyframes shim{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hv2 .oh{background:linear-gradient(110deg,#D80000,#C39C63,#D80000);background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 5s ease infinite}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bar"><strong>Variant preview</strong> <span>— pick a card style (A / B / C) and a hero style (I / II), then tell me.</span></div>
+
+<!-- ================= GIFT CARD VARIANTS ================= -->
+<main class="wrap" style="padding-block:3rem 5rem">
+  <span class="eyebrow">Effect set 1</span>
+  <h1 style="font-size:clamp(1.9rem,3.4vw,2.6rem)">Gift-card hover</h1>
+  <p class="lede">Hover each card. All three share the exact burgundy theme and the current card anatomy — only the hover layer changes.</p>
+
+  <p class="v-label">Card A — <b>Shine sweep</b></p>
+  <p class="hint">Light sweep glides across the photo, card lifts, hairline underline draws under the gift name. Quiet luxury.</p>
+  <div class="cards">
+    <article class="gift-card cv1">
+      <div class="gift-card__media">
+        <img src="assets/gifts/executive-engraved-set.jpg" alt="Executive Engraved Set" loading="lazy">
+        <span class="sweep" aria-hidden="true"></span>
+        <span class="gift-card__tag">Client &amp; VIP</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>Executive Engraved Set</h3>
+        <p class="gift-card__desc">Matte-black rollerball and leather card holder, laser-engraved with your recipient's name and your logo.</p>
+        <p class="gift-card__price">From <strong>RM 288</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Zm0 17.94h-.01a8.2 8.2 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.14 8.14 0 0 1-1.25-4.34c0-4.52 3.68-8.2 8.2-8.2a8.15 8.15 0 0 1 8.19 8.2c0 4.52-3.68 8.18-8.19 8.18Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="gift-card cv1">
+      <div class="gift-card__media">
+        <img src="assets/gifts/artisan-tea-set.jpg" alt="Artisan Tea Set" loading="lazy">
+        <span class="sweep" aria-hidden="true"></span>
+        <span class="gift-card__tag">Raya</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>Artisan Tea Set</h3>
+        <p class="gift-card__desc">Single-estate teas in a gift-wrapped chest with personalised greeting band.</p>
+        <p class="gift-card__price">From <strong>RM 168</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <p class="v-label">Card B — <b>CTA reveal</b></p>
+  <p class="hint">A burgundy veil rises over the photo and a "Get a quote" button slides up onto the image. Sells harder — the next step is literally on the picture.</p>
+  <div class="cards">
+    <article class="gift-card cv2">
+      <div class="gift-card__media">
+        <img src="assets/gifts/vip-signature-box.jpg" alt="VIP Signature Keepsake Box" loading="lazy">
+        <span class="veil" aria-hidden="true"></span>
+        <div class="reveal-cta"><a class="btn btn--light btn--sm" href="#contact">Get a quote</a></div>
+        <span class="gift-card__tag">Client &amp; VIP</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>VIP Signature Keepsake Box</h3>
+        <p class="gift-card__desc">Our flagship. A rigid linen-wrapped box built around premium spirits or single-origin tea, finished with a hand-written note.</p>
+        <p class="gift-card__price">From <strong>RM 588</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn wa-icon" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Zm0 17.94h-.01a8.2 8.2 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.14 8.14 0 0 1-1.25-4.34c0-4.52 3.68-8.2 8.2-8.2a8.15 8.15 0 0 1 8.19 8.2c0 4.52-3.68 8.18-8.19 8.18Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="gift-card cv2">
+      <div class="gift-card__media">
+        <img src="assets/gifts/wellness-aroma-box.jpg" alt="Wellness Aroma Box" loading="lazy">
+        <span class="veil" aria-hidden="true"></span>
+        <div class="reveal-cta"><a class="btn btn--light btn--sm" href="#contact">Get a quote</a></div>
+        <span class="gift-card__tag">Personal</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>Wellness Aroma Box</h3>
+        <p class="gift-card__desc">Aromatherapy candles, bath soaks and calming teas in a soft-touch gift box.</p>
+        <p class="gift-card__price">From <strong>RM 138</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn wa-icon" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <p class="v-label">Card C — <b>Gradient ring + cursor glow</b></p>
+  <p class="hint">A gold-and-burgundy light traces the card's edge while a soft glow follows your cursor across it. The most festive; pairs best with the existing 3D tilt.</p>
+  <div class="cards">
+    <article class="gift-card cv3" id="cv3a">
+      <span class="glow" aria-hidden="true"></span>
+      <div class="gift-card__media">
+        <img src="assets/gifts/cny-prosperity-hamper.jpg" alt="CNY Prosperity Hamper" loading="lazy">
+        <span class="gift-card__tag">CNY</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>CNY Prosperity Hamper</h3>
+        <p class="gift-card__desc">Pineapples, premium teas and festive confections in a red-and-gold woven basket.</p>
+        <p class="gift-card__price">From <strong>RM 228</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="gift-card cv3" id="cv3b">
+      <span class="glow" aria-hidden="true"></span>
+      <div class="gift-card__media">
+        <img src="assets/gifts/christmas-noel-box.jpg" alt="Christmas Noel Box" loading="lazy">
+        <span class="gift-card__tag">Christmas</span>
+      </div>
+      <div class="gift-card__body">
+        <h3>Christmas Noël Box</h3>
+        <p class="gift-card__desc">Festive nibbles, mulled-spice tea and a keepsake bauble in a deep-green gift box.</p>
+        <p class="gift-card__price">From <strong>RM 158</strong></p>
+        <div class="gift-card__actions">
+          <button class="btn btn--ghost btn--sm" type="button">Add to quote</button>
+          <button class="icon-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.36-1.4a9.8 9.8 0 0 0 4.68 1.19h.01c5.43 0 9.85-4.42 9.85-9.86A9.8 9.8 0 0 0 19 4.86 9.78 9.78 0 0 0 12.04 2Z"/></svg></button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <hr style="margin-block:4rem">
+
+  <!-- ================= HERO VARIANTS ================= -->
+  <span class="eyebrow">Effect set 2</span>
+  <h1 style="font-size:clamp(1.9rem,3.4vw,2.6rem)">Hero treatment</h1>
+  <p class="lede">Two directions for the top of the page. Hero I reacts to <em>scrolling</em> this page (scroll up and down over it); Hero II reacts to your <em>mouse</em> (move across it).</p>
+
+  <p class="v-label">Hero I — <b>Scroll-reactive</b></p>
+  <p class="hint">The photo gently zooms and drifts while the eyebrow, headline and buttons rise in sequence as you scroll. Calm, editorial, like a magazine cover coming alive.</p>
+  <section class="hv1" id="hero1-demo">
+    <div class="hv1-sticky">
+      <div class="demo-hero">
+        <div class="demo-hero__bg" data-bg="assets/hero.jpg"></div>
+        <div class="demo-hero__content">
+          <span class="badge">Corporate &amp; personal gifting · Penang</span>
+          <h2><span class="oh">Oh!</span> Gift them something they remember.</h2>
+          <p class="lede">Customised gifts, meaningful moments — curated hampers and keepsakes with your branding, delivered island-wide.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="#contact">Request a quote</a>
+            <a class="btn btn--ghost" href="#gifting">Browse collections</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:46vh"></div><!-- scroll runway so you can feel the scroll reactivity -->
+  </section>
+
+  <p class="v-label">Hero II — <b>Depth collage</b></p>
+  <p class="hint">Move your mouse over it. Floating gift photos and gold sparks slide on separate depths (parallax), and the "Oh!" has a slow gold shimmer. Playful, tactile, more alive than anything on the page today.</p>
+  <section class="hv2 demo-hero" id="hero2-demo">
+    <div class="layer float-photo fp1"><img src="assets/gifts/vip-signature-box.jpg" alt="" loading="lazy"></div>
+    <div class="layer float-photo fp2"><img src="assets/gifts/artisan-tea-set.jpg" alt="" loading="lazy"></div>
+    <div class="layer float-photo fp3"><img src="assets/gifts/cny-prosperity-hamper.jpg" alt="" loading="lazy"></div>
+    <div class="layer spark" style="right:26%;top:16%"></div>
+    <div class="layer spark" style="right:8%;top:60%;width:8px;height:8px"></div>
+    <div class="layer spark" style="right:34%;top:74%;width:6px;height:6px"></div>
+    <div class="demo-hero__content">
+      <span class="badge">Corporate &amp; personal gifting · Penang</span>
+      <h2><span class="oh">Oh!</span> Gift them something they remember.</h2>
+      <p class="lede">Customised gifts, meaningful moments — curated hampers and keepsakes with your branding, delivered island-wide.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#contact">Request a quote</a>
+        <a class="btn btn--ghost" href="#gifting">Browse collections</a>
+      </div>
+    </div>
+  </section>
+  <p class="note">Hero I is shown inside a scroll-runway so you can feel the motion; on the real page the effect runs against the actual hero at the top of the site.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (REDUCED) return;
+
+  /* --- Card C: cursor glow coordinates --- */
+  [["cv3a"],["cv3b"]].forEach(function (id) {
+    var card = document.getElementById(id[0]);
+    if (!card) return;
+    var glow = card.querySelector(".glow");
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect();
+      var px = ((e.clientX - r.left) / r.width) * 100;
+      var py = ((e.clientY - r.top) / r.height) * 100;
+      card.style.setProperty("--gx", px + "%");
+      card.style.setProperty("--gy", py + "%");
+    });
+  });
+
+  /* --- Hero I: scroll-reactive — bg zooms/drifts with page scroll --- */
+  var hv1 = document.getElementById("hero1-demo");
+  var bg = hv1 && hv1.querySelector(".demo-hero__bg");
+  if (hv1 && bg) {
+    var pending = false;
+    function paint() {
+      pending = false;
+      var r = hv1.getBoundingClientRect();
+      var vh = window.innerHeight;
+      // -1 (below) .. 1 (above)
+      var t = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
+      bg.style.transform = "translate3d(0," + (t * 14).toFixed(2) + "px,0) scale(" + (1.06 + (1 - Math.abs(t)) * 0.03).toFixed(4) + ")";
+      hv1.style.setProperty("--fade", (1 - Math.abs(t) * 2).toFixed(2));
+    }
+    ["scroll", "resize"].forEach(function (ev) {
+      window.addEventListener(ev, function () {
+        if (!pending) { pending = true; requestAnimationFrame(paint); }
+      }, { passive: true });
+    });
+    paint();
+  }
+
+  /* --- Hero II: depth collage — CSS custom props follow the mouse --- */
+  var hv2 = document.getElementById("hero2-demo");
+  if (hv2 && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    hv2.addEventListener("pointermove", function (e) {
+      var r = hv2.getBoundingClientRect();
+      hv2.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100);
+      hv2.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100);
+    });
+  }
+})();
+</script>
+</body>
+</html>
