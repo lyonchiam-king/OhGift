@@ -1,0 +1,45 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 573 >>
+stream
+BT 0.16 0.14 0.13 rg
+/F2 26 Tf 1 0 0 1 72 720 Tm (Oh! Gift  -  Gift Catalogue) Tj
+/F1 12 Tf 1 0 0 1 72 686 Tm (PLACEHOLDER FILE) Tj
+/F1 11 Tf 1 0 0 1 72 650 Tm (This is a stand-in for the real catalogue.) Tj
+/F1 11 Tf 1 0 0 1 72 630 Tm (Replace assets/catalogue.pdf with your actual PDF.) Tj
+/F1 11 Tf 1 0 0 1 72 594 Tm (The filename must stay the same, or update) Tj
+/F1 11 Tf 1 0 0 1 72 574 Tm (CATALOGUE_PDF in js/site.config.js to match.) Tj
+/F1 10 Tf 1 0 0 1 72 528 Tm (Delivered after email capture on the website.) Tj
+ET
+0.72 0.43 0.47 RG 1.2 w 72 700 m 400 700 l S
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000874 00000 n 
+0000000944 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1015
+%%EOF
