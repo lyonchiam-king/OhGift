@@ -88,7 +88,7 @@ function callbackPage(provider, bodyJSON, ok) {
     "<script>" +
       "var delivered=false;" +
       "try{if(window.opener&&window.opener.postMessage){window.opener.postMessage('authorization:" +
-      provider + ":" + kind + ":'" + bodyJSON + ",'*');delivered=true}}catch(e){}" +
+      provider + ":" + kind + ":'+(" + bodyJSON + "),'*');delivered=true}}catch(e){}" +
       "var el=document.getElementById('diag');" +
       "el.textContent = delivered " +
         "? 'Delivered to the admin page — it should now log you in. Closing this window.' " +
