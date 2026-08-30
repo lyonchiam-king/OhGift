@@ -5,8 +5,10 @@
       "name": "CNY Prosperity Hamper",
       "price": 188,
       "tag": "Chinese New Year",
-      "cats": ["cny"],
-      "image": "assets/gifts/2025 CNY.jpg",
+      "cats": [
+        "cny"
+      ],
+      "image": "/assets/gifts/uploads/💮2025-cny-collection-【blessing-福】💮高端设计，颜值出众融合了新年特色，外观喜庆大气，无论是送家人、朋友，还是商业伙伴，都是体面之选！🏮【blessin.jpg",
       "alt": "CNY Prosperity Hamper — premium Chinese New Year gift hamper",
       "desc": "Abalone, premium teas and golden confections in a lacquered red-and-gold keepsake box. A classic corporate reunion gift."
     },
@@ -15,8 +17,10 @@
       "name": "Raya Selamat Hamper",
       "price": 168,
       "tag": "Hari Raya",
-      "cats": ["raya"],
-      "image": "assets/gifts/raya-selamat-hamper.jpg",
+      "cats": [
+        "raya"
+      ],
+      "image": "/assets/gifts/uploads/💮2025-cny-collection-【blessing-福】💮高端设计，颜值出众融合了新年特色，外观喜庆大气，无论是送家人、朋友，还是商业伙伴，都是体面之选！🏮【blessin-1-.jpg",
       "alt": "Raya Selamat Hamper — Hari Raya gift hamper with traditional treats",
       "desc": "Kuih raya, dates, syrup and fine dry goods presented in a woven songket-trim basket. Halal-certified throughout."
     },
@@ -25,7 +29,9 @@
       "name": "Deepavali Festival of Light Box",
       "price": 158,
       "tag": "Deepavali",
-      "cats": ["deepavali"],
+      "cats": [
+        "deepavali"
+      ],
       "image": "assets/gifts/deepavali-light-box.jpg",
       "alt": "Deepavali Festival of Light Box — Deepavali gift box with sweets and diya",
       "desc": "Handmade Indian sweets, spiced nuts and a brass diya set in a jewel-toned gift box with gold foiling."
@@ -35,7 +41,9 @@
       "name": "Christmas Noel Gift Box",
       "price": 178,
       "tag": "Christmas",
-      "cats": ["christmas"],
+      "cats": [
+        "christmas"
+      ],
       "image": "assets/gifts/christmas-noel-box.jpg",
       "alt": "Christmas Noel Gift Box — festive Christmas corporate gift box",
       "desc": "Artisan chocolate, shortbread, spiced cocoa and a scented candle in a deep-green box with a satin ribbon."
@@ -45,7 +53,9 @@
       "name": "Executive Engraved Set",
       "price": 288,
       "tag": "Client & VIP",
-      "cats": ["vip"],
+      "cats": [
+        "vip"
+      ],
       "image": "assets/gifts/executive-engraved-set.jpg",
       "alt": "Executive Engraved Pen and Card Holder Set — personalised corporate gift",
       "desc": "Matte-black rollerball and leather card holder, laser-engraved with your recipient's name and your company logo."
@@ -55,7 +65,9 @@
       "name": "VIP Signature Keepsake Box",
       "price": 588,
       "tag": "Client & VIP",
-      "cats": ["vip"],
+      "cats": [
+        "vip"
+      ],
       "image": "assets/gifts/vip-signature-box.jpg",
       "alt": "VIP Signature Keepsake Box — high-value curated executive gift",
       "desc": "Our flagship. A rigid linen-wrapped box built around premium spirits or single-origin tea, finished with a hand-written note."
@@ -65,7 +77,9 @@
       "name": "Artisan Wellness & Aroma Box",
       "price": 228,
       "tag": "Client & VIP",
-      "cats": ["vip"],
+      "cats": [
+        "vip"
+      ],
       "image": "assets/gifts/wellness-aroma-box.jpg",
       "alt": "Artisan Wellness and Aroma Box — wellness gift set with candle and tea",
       "desc": "Soy candle, essential-oil roller, herbal infusions and a linen eye pillow. A favourite for staff appreciation and year-end thank-yous."
@@ -75,7 +89,10 @@
       "name": "Premium Tea & Teaware Set",
       "price": 248,
       "tag": "Client & VIP",
-      "cats": ["vip", "cny"],
+      "cats": [
+        "vip",
+        "cny"
+      ],
       "image": "assets/gifts/artisan-tea-set.jpg",
       "alt": "Premium Tea and Teaware Set — curated tea gift with porcelain teaware",
       "desc": "Single-origin oolong and pu-erh with hand-glazed porcelain. Understated, and reliably well received by senior clients."
