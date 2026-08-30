@@ -1,9 +1,10 @@
 # Deploys the OAuth worker below (admin/oauth-worker.js) to Cloudflare.
 # Used only for the one-time setup — deploy with:  npx wrangler deploy
 # (run from this admin/ folder).
-name = "ohgift-cms-auth"
+name = "ohgift-cms-oauth"
 main = "oauth-worker.js"
 compatibility_date = "2026-08-01"
+workers_dev = true
 
 # Hosts allowed to open the admin login (comma-separated).
 # Add "localhost:8000" while testing locally, if ever needed.
