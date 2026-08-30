@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "Penang, Malaysia · Corporate & Personal Gifting",
+    "title": "Gifting that says",
+    "titleAccent": "Oh!",
+    "tagline": "Customised gifts, meaningful moments",
+    "lede": "Premium curated gifts for Malaysian companies and the people they care about — festive hampers, client & VIP gifting and fully custom-branded corporate sets, delivered nationwide.",
+    "image": "assets/hero.jpg"
+  },
+  "corporate": {
+    "eyebrow": "For Business",
+    "title": "Corporate gifting, handled end to end",
+    "lede": "Built for HR, marketing and procurement teams who need hundreds of gifts to land on time, on brand, and with paperwork that clears finance without a second email.",
+    "image": "assets/corporate.jpg",
+    "imageAlt": "Custom-branded corporate gift boxes being prepared for a Malaysian company order"
+  },
+  "how": {
+    "eyebrow": "Simple by design",
+    "title": "How it works",
+    "lede": "Four steps from first look to delivered gifts. No accounts, no checkout — just a conversation and a clear quote."
+  },
+  "occasions": {
+    "eyebrow": "For someone special",
+    "title": "Personal gifting, beautifully done",
+    "lede": "Not every gift is for a boardroom. Send one exquisitely wrapped box to one person — same curation, same finish, no minimum order.",
+    "note": "Add a hand-written card, choose your ribbon, and we'll deliver straight to their door with the price tag discreetly removed.",
+    "image": "assets/personal.jpg",
+    "imageAlt": "Personal gift box wrapped in blush paper with a red satin ribbon"
+  },
+  "about": {
+    "eyebrow": "Our story",
+    "title": "Made in Penang, sent across Malaysia",
+    "body": "Oh! Gift began with a simple frustration: corporate gifting in Malaysia too often meant the same tired hamper, wrapped in a hurry, arriving late. We thought the moment deserved better.\n\nFrom our studio in Penang we curate every box by hand — sourcing from makers we have actually met, choosing packaging that feels considered, and checking each gift before it leaves us. The result is something a client is genuinely pleased to open, and a company is proud to have sent.",
+    "image": "assets/about.jpg",
+    "imageAlt": "The Oh! Gift studio in Penang, where each gift is curated and packed by hand"
+  },
+  "catalogue": {
+    "eyebrow": "Free download",
+    "title": "The full Oh! Gift catalogue",
+    "lede": "Every gift, every size, with corporate pricing tiers and branding options — as a PDF you can forward to your team."
+  },
+  "contact": {
+    "eyebrow": "Let's talk",
+    "title": "Request a quote",
+    "lede": "Tell us what you need and we'll come back within one working day with options and pricing. Prefer to talk it through? WhatsApp is usually fastest."
+  }
+}

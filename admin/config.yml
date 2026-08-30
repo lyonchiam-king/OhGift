@@ -30,6 +30,193 @@ public_folder: "/assets/gifts/uploads"
 publish_mode: ""
 
 collections:
+  - name: sections
+    label: Homepage sections
+    label_singular: section
+    description: >-
+      Edit the label, headline, paragraph and photo of each section on the
+      home page. Each section is a separate panel — open the one you want,
+      change the fields, publish. Leave a field empty to keep what the page
+      already shows.
+    files:
+      - name: sections
+        label: Home page content
+        label_singular: section
+        file: assets/data/sections.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: hero
+            label: 1 · Hero (top banner)
+            widget: object
+            collapsed: true
+            hint: The big banner at the very top of the page
+            fields:
+              - name: eyebrow
+                label: Small label above the title
+                widget: string
+                required: false
+              - name: title
+                label: Main title (the part before “Oh!”)
+                widget: string
+                required: false
+                hint: e.g. “Gifting that says”
+              - name: titleAccent
+                label: The styled “Oh!” word
+                widget: string
+                required: false
+                hint: Shown big and highlighted at the end of the title
+              - name: tagline
+                label: Tagline under the title
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the tagline
+                widget: text
+                required: false
+              - name: image
+                label: Background photo
+                widget: image
+                required: false
+                hint: Wide photo, around 1920×1080
+
+          - name: corporate
+            label: 2 · Corporate gifting
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“For Business”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the headline
+                widget: text
+                required: false
+              - name: image
+                label: Photo
+                widget: image
+                required: false
+              - name: imageAlt
+                label: Photo alt text (accessibility / SEO)
+                widget: string
+                required: false
+
+          - name: how
+            label: 3 · How it works
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“Simple by design”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the headline
+                widget: text
+                required: false
+
+          - name: occasions
+            label: 4 · Personal gifting
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“For someone special”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the headline
+                widget: text
+                required: false
+              - name: note
+                label: Small note below the occasion tags
+                widget: text
+                required: false
+              - name: image
+                label: Photo
+                widget: image
+                required: false
+              - name: imageAlt
+                label: Photo alt text (accessibility / SEO)
+                widget: string
+                required: false
+
+          - name: about
+            label: 5 · About (our story)
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“Our story”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: body
+                label: Story paragraphs
+                widget: text
+                required: false
+                hint: Leave a blank line between paragraphs
+              - name: image
+                label: Photo
+                widget: image
+                required: false
+              - name: imageAlt
+                label: Photo alt text (accessibility / SEO)
+                widget: string
+                required: false
+
+          - name: catalogue
+            label: 6 · Catalogue download
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“Free download”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the headline
+                widget: text
+                required: false
+
+          - name: contact
+            label: 7 · Contact
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: Small label (“Let's talk”)
+                widget: string
+                required: false
+              - name: title
+                label: Headline
+                widget: string
+                required: false
+              - name: lede
+                label: Paragraph under the headline
+                widget: text
+                required: false
+
   - name: gifts
     label: Gifts
     label_singular: gift
