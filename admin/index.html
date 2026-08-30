@@ -10,10 +10,13 @@
     /* small brand touch while Decap loads */
     body { margin: 0; background: #FDF9F5; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
 </head>
 <body>
-  <script src="config.yml"></script>
+  <!-- Decap mounts its UI into <body> on load, so it must load from
+       inside <body> (loading it in <head> crashes init with
+       "appendChild of null" and leaves the page blank). Version is
+       pinned so a future release can't break the page unnoticed. -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.15.1/dist/decap-cms.js"></script>
   <noscript>This admin page requires JavaScript.</noscript>
 </body>
 </html>
