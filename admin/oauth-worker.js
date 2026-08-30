@@ -79,13 +79,22 @@ function authPage(provider, authorizeUrl, targetOrigin) {
      authorization:<provider>:error:<JSON>   */
 function callbackPage(provider, bodyJSON, ok) {
   var kind = ok ? "success" : "error";
+  /* Content first, script last — the script annotates the visible
+     "diag" paragraph with the real delivery outcome, so a silent
+     postMessage failure can't masquerade as success. */
   return page(
+    "<p>" + (ok ? "Authorised." : "Login failed — this window can be closed.") + "</p>" +
+    "<p id='diag' style='font-size:13px;color:#8C1116;max-width:340px'>Checking&hellip;</p>" +
     "<script>" +
-      "try{window.opener&&window.opener.postMessage('authorization:" +
-      provider + ":" + kind + ":'" + bodyJSON + ",'*')}catch(e){}" +
-      "setTimeout(function(){window.close()},300);" +
-    "<\/script>" +
-    "<p>" + (ok ? "Authorised — safe to close this window." : "Login failed — this window can be closed.") + "</p>"
+      "var delivered=false;" +
+      "try{if(window.opener&&window.opener.postMessage){window.opener.postMessage('authorization:" +
+      provider + ":" + kind + ":'" + bodyJSON + ",'*');delivered=true}}catch(e){}" +
+      "var el=document.getElementById('diag');" +
+      "el.textContent = delivered " +
+        "? 'Delivered to the admin page — it should now log you in. Closing this window.' " +
+        ": 'PROBLEM: could not reach the admin page (the login window opened without a link back). Leave this window open and report the exact text you see here.';" +
+      "setTimeout(function(){window.close()},delivered?400:20000);" +
+    "<\/script>"
   );
 }
 
